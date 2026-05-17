@@ -155,7 +155,7 @@
 
         .ppt-section .project-media {
             width: 100%;
-            height: 500px;
+            height: 320px;
 
             overflow: hidden;
             border-radius: 24px;
@@ -278,6 +278,63 @@
                 font-size: 2.3rem;
             }
         }
+        /* FIGMA SLIDER */
+.figma-slider {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
+    border-radius: 24px;
+}
+
+.slider-images {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+    height: 100%;
+}
+
+.slider-images img {
+    width: 100%;
+    min-width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* BUTTONS */
+.slide-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.45);
+    color: white;
+
+    cursor: pointer;
+    z-index: 10;
+
+    font-size: 1rem;
+
+    transition: 0.3s ease;
+}
+
+.slide-btn:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.prev {
+    left: 12px;
+}
+
+.next {
+    right: 12px;
+}
     </style>
 </head>
 
@@ -382,30 +439,55 @@
 
     <div class="projects-grid">
 
+        <!-- QR PAYMENT CARD -->
         <div class="project-card">
-            <div class="project-media">
-                <img src="QRCodepurchasing.png" alt="QR Payment Receipt">
+
+            <div class="figma-slider">
+
+                <button class="slide-btn prev" onclick="moveSlide('qrSlider', -1)">❮</button>
+
+                <div class="slider-images" id="qrSlider">
+                    <img src="QRCodepurchasing.png" alt="QR Payment Design">
+                    <img src="QRCodeRecipt.png" alt="QR Payment Receipt">
+                </div>
+
+                <button class="slide-btn next" onclick="moveSlide('qrSlider', 1)">❯</button>
+
             </div>
 
             <div class="project-content">
-                <h3>QR Payment Receipt Design</h3>
+                <h3>QR Payment System</h3>
                 <p>
-                    Clean and modern digital receipt interface designed for a seamless payment confirmation experience.
+                    Modern fintech UI focused on clean payment experiences and elegant receipt layouts.
                 </p>
             </div>
+
         </div>
 
+        <!-- SKINFLUENCER CARD -->
         <div class="project-card">
-            <div class="project-media">
-                <img src="QRCodeRecipt.png" alt="QR Payment Receipt">
+
+            <div class="figma-slider">
+
+                <button class="slide-btn prev" onclick="moveSlide('skinSlider', -1)">❮</button>
+
+                <div class="slider-images" id="skinSlider">
+                    <img src="Skinfluencer1.png" alt="Skinfluencer Design">
+                    <img src="Skinfluencer2.png" alt="Skinfluencer Design">
+                    <img src="Skinfluencer3.png" alt="Skinfluencer Design">
+                </div>
+
+                <button class="slide-btn next" onclick="moveSlide('skinSlider', 1)">❯</button>
+
             </div>
 
             <div class="project-content">
-                <h3>Digital Payment Receipt</h3>
+                <h3>Skinfluencer UI Concept</h3>
                 <p>
-                    Minimal fintech receipt concept focused on clarity, readability, and elegant visual structure.
+                    Elegant skincare application interface focused on beauty, simplicity, and modern UI design.
                 </p>
             </div>
+
         </div>
 
     </div>
@@ -521,5 +603,31 @@
     </section>
 
 </body>
+<script>
 
+    const sliders = {};
+
+    function moveSlide(id, direction) {
+
+        const slider = document.getElementById(id);
+        const images = slider.querySelectorAll("img");
+
+        if (!sliders[id]) {
+            sliders[id] = 0;
+        }
+
+        sliders[id] += direction;
+
+        if (sliders[id] < 0) {
+            sliders[id] = images.length - 1;
+        }
+
+        if (sliders[id] >= images.length) {
+            sliders[id] = 0;
+        }
+
+        slider.style.transform = `translateX(-${sliders[id] * 100}%)`;
+    }
+
+</script>
 </html>
