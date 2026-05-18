@@ -41,12 +41,7 @@ function typeEffect() {
 // SCROLL FUNCTION
 // =========================
 function scrollToProjects() {
-    const section = document.getElementById("projects");
-    if (section) {
-        section.scrollIntoView({
-            behavior: "smooth"
-        });
-    }
+    window.location.href = "projects.html";
 }
 
 // =========================
@@ -55,4 +50,15 @@ function scrollToProjects() {
 document.addEventListener("DOMContentLoaded", () => {
     typeEffect();
 });
+const menuToggle = document.getElementById("menu-toggle");
+    const mobileNav = document.getElementById("mobile-nav");
 
+    menuToggle.addEventListener("click", () => {
+
+        menuToggle.classList.toggle("active");
+        mobileNav.classList.toggle("active");
+
+});
+
+
+    
